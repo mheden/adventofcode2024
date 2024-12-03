@@ -5,8 +5,8 @@ import re
 def part1(s):
     acc = 0
     for line in unpack(s):
-        for m in re.findall(r"mul\((\d+),(\d+)\)", line):
-            acc += int(m[0]) * int(m[1])
+        for a, b in re.findall(r"mul\((\d+),(\d+)\)", line):
+            acc += int(a) * int(b)
     return acc
 
 
@@ -14,12 +14,12 @@ def part2(s):
     acc = 0
     enable = True
     for line in unpack(s):
-        for m in re.findall(r"(don't|do|mul)(\((\d+),(\d+)\))?", line):
-            if m[0] == "mul" and m[2] and enable:
-                acc += int(m[2]) * int(m[3])
-            elif m[0] == "don't":
+        for op, a, b in re.findall(r"(don't|do|mul)(?:\((\d+),(\d+)\))?", line):
+            if op == "mul" and a and enable:
+                acc += int(a) * int(b)
+            elif op == "don't":
                 enable = False
-            elif m[0] == "do":
+            elif op == "do":
                 enable = True
     return acc
 
