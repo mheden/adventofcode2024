@@ -1,4 +1,5 @@
 import re
+import os.path
 from contextlib import suppress
 from queue import PriorityQueue, Empty
 
@@ -172,6 +173,10 @@ def transpose(lol):
         for y, val in enumerate(row):
             t[y][x] = val
     return t
+
+
+def puzzlefile(file):
+    return os.path.splitext(os.path.basename(file))[0] + ".txt"
 
 
 if __name__ == "__main__":

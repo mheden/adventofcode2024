@@ -1,5 +1,5 @@
-from utils import slurp, unpack, assert_eq, numbers, transpose
 from collections import Counter
+from utils import puzzlefile, slurp, unpack, assert_eq, numbers, transpose
 
 
 def part1(s):
@@ -21,7 +21,7 @@ def part2(s):
     return acc
 
 
-filedata = slurp("01.txt")
+puzzledata = slurp(puzzlefile(__file__))
 testdata = """
 3   4
 4   3
@@ -34,9 +34,9 @@ testdata = """
 print("#--- Day 1.1: Historian Hysteria:", end=" ")
 
 assert_eq(part1(testdata), 11)
-print(part1(filedata))
+print(part1(puzzledata))
 
 print("#--- Day 1.2: Historian Hysteria:", end=" ")
 
 assert_eq(part2(testdata), 31)
-print(part2(filedata))
+print(part2(puzzledata))

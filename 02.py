@@ -1,4 +1,4 @@
-from utils import slurp, unpack, assert_eq, numbers
+from utils import puzzlefile, slurp, unpack, assert_eq, numbers
 
 
 def is_safe(V):
@@ -40,7 +40,7 @@ def part2(s):
     return acc
 
 
-filedata = slurp("02.txt")
+puzzledata = slurp(puzzlefile(__file__))
 testdata = """
 7 6 4 2 1
 1 2 7 8 9
@@ -53,9 +53,9 @@ testdata = """
 print("#--- Day 2.1: Red-Nosed Reports:", end=" ")
 
 assert_eq(part1(testdata), 2)
-print(part1(filedata))
+print(part1(puzzledata))
 
 print("#--- Day 2.2: Red-Nosed Reports:", end=" ")
 
 assert_eq(part2(testdata), 4)
-print(part2(filedata))
+print(part2(puzzledata))
