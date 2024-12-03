@@ -168,7 +168,7 @@ def transpose(lol):
     Transpose list of list:
         [[1,2,3,4], [5,6,7,8]] -> [[1,5], [2,6], [3,7], [4,8]]
     """
-    t = [[0 for _ in range(len(lol))] for _ in range(len(lol[0]))]
+    t = [[0 for _, _ in enumerate(lol)] for _, _ in enumerate(lol[0])]
     for x, row in enumerate(lol):
         for y, val in enumerate(row):
             t[y][x] = val
