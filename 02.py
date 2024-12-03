@@ -23,20 +23,15 @@ def part1(s):
 
 
 def permutate(report):
-    reports = []
     for i, _ in enumerate(report):
-        reports.append(report[:i] + report[i + 1 :])
-    return reports
+        yield report[:i] + report[i + 1 :]
 
 
 def part2(s):
     acc = 0
     for report in unpack(s):
         V = numbers(report)
-        if is_safe(V):
-            acc += 1
-        else:
-            acc += 1 if any(map(is_safe, permutate(V))) else 0
+        acc += 1 if (is_safe(V) or any(map(is_safe, permutate(V)))) else 0
     return acc
 
 
