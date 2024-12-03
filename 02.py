@@ -1,12 +1,12 @@
 from utils import puzzlefile, slurp, unpack, assert_eq, numbers
 
 
-def is_safe(V):
+def is_safe(report):
     inc = True
     dec = True
     diff = True
-    prev = V[0]
-    for curr in V[1:]:
+    prev = report[0]
+    for curr in report[1:]:
         inc = inc and (prev < curr)
         dec = dec and (prev > curr)
         diff = diff and (abs(prev - curr) >= 1 and abs(prev - curr) <= 3)
@@ -15,11 +15,7 @@ def is_safe(V):
 
 
 def part1(s):
-    acc = 0
-    for report in unpack(s):
-        V = numbers(report)
-        acc += 1 if is_safe(V) else 0
-    return acc
+    return sum(is_safe(report) for report in map(numbers, unpack(s)))
 
 
 def permutate(report):
@@ -28,11 +24,10 @@ def permutate(report):
 
 
 def part2(s):
-    acc = 0
-    for report in unpack(s):
-        V = numbers(report)
-        acc += 1 if (is_safe(V) or any(map(is_safe, permutate(V)))) else 0
-    return acc
+    return sum(
+        is_safe(report) or any(map(is_safe, permutate(report)))
+        for report in map(numbers, unpack(s))
+    )
 
 
 puzzledata = slurp(puzzlefile(__file__))
