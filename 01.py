@@ -14,11 +14,7 @@ def part2(s):
     M = [numbers(row) for row in unpack(s)]
     T = transpose(M)
     COUNT = Counter(T[1])
-
-    acc = 0
-    for x in T[0]:
-        acc += x * COUNT[x]
-    return acc
+    return sum(x * COUNT[x] for x in T[0])
 
 
 puzzledata = slurp(puzzlefile(__file__))
