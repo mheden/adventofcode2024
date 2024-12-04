@@ -1,7 +1,7 @@
-import re
-import os.path
 from contextlib import suppress
 from queue import PriorityQueue, Empty
+import os.path
+import re
 
 
 BIGNUM = 10**100
@@ -111,11 +111,11 @@ def numbers(s):
 
 
 def digits(s):
-    """return all digits in a string"""
+    """return list of digits in a string"""
     return lmap(int, re.findall(r"\d", s))
 
 
-def rev(s):
+def revstr(s):
     """reverse a string"""
     return s[::-1]
 
