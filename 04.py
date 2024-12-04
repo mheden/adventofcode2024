@@ -5,19 +5,18 @@ from contextlib import suppress
 def part1(s):
     G, XMAX, YMAX = parse_grid(s)
     words = []
-    for y in range(0, YMAX + 1):
-        for x in range(0, XMAX + 1):
-            for heading in ["E", "NE", "N", "NW", "W", "SW", "S", "SE"]:
-                with suppress(KeyError):
-                    words.append(cat(G[(xx, yy)] for xx, yy in line(x, y, heading, 4)))
+    for x, y in [(x, y) for x, y in G if G[(x, y)] == "X"]:
+        for heading in ["E", "NE", "N", "NW", "W", "SW", "S", "SE"]:
+            with suppress(KeyError):
+                words.append(cat(G[(xx, yy)] for xx, yy in line(x, y, heading, 4)))
     return words.count("XMAS")
 
 
 def part2(s):
     G, XMAX, YMAX = parse_grid(s)
     acc = 0
-    for y in range(1, YMAX):
-        for x in range(1, XMAX):
+    for x, y in [(x, y) for x, y in G if G[(x, y)] == "A"]:
+        with suppress(KeyError):
             words = [
                 G[(x - 1, y - 1)] + G[(x, y)] + G[(x + 1, y + 1)],
                 G[(x + 1, y - 1)] + G[(x, y)] + G[(x - 1, y + 1)],
