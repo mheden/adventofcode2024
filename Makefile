@@ -7,5 +7,5 @@ all:
 format:
 	ruff format *.py
 
-check:
+check: format
 	ruff check *.py

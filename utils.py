@@ -179,6 +179,57 @@ def puzzlefile(file):
     return os.path.splitext(os.path.basename(file))[0] + ".txt"
 
 
+def parse_grid(s, ignore=""):
+    """
+    Generates a dict of the grid with coordinates as keys (G[(x, y)] = val)
+
+    `ignore` contains a list of characters to ignore
+
+    (0, 0) ------> (0, 9)
+      |              |
+      |              |
+      |              |
+      |              |
+      v              v
+    (9, 0) ------> (9, 9)
+
+    Returns tuple: (G, xmax, ymax)
+    """
+    grid = {}
+    for y, row in enumerate(unpack(s)):
+        for x, c in enumerate(list(row)):
+            if c not in ignore:
+                grid[(x, y)] = c
+        xmax = x
+    ymax = y
+    return grid, xmax, ymax
+
+
+def line(x, y, heading, len_):
+    """
+    Generate coordinates for a line starting at (x, y) with specified heading
+    and length.
+    """
+    HEADINGS = {
+        "E": (1, 0),
+        "NE": (1, 1),
+        "N": (0, 1),
+        "NW": (-1, 1),
+        "W": (-1, 0),
+        "SW": (-1, -1),
+        "S": (0, -1),
+        "SE": (1, -1),
+    }
+    dx, dy = HEADINGS[heading]
+    for i in range(len_):
+        yield x + i * dx, y + i * dy
+
+
+def cat(things):
+    """Concatenate the things."""
+    return "".join(map(str, things))
+
+
 if __name__ == "__main__":
     # chunks
     assert_eq(["ab", "cd", "ef", "gh"], list(chunks("abcdefgh", 2)))
